@@ -4,13 +4,6 @@ COL='\033[1;32m'
 NC='\033[0m' # No Color
 echo -e "${COL}Setting up klipper"
 
-read -p "Do you have \"Plugin extras\" installed? (y/n): " -n 1 -r
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    echo -e "${COL}\nPlease go to settings and install plugin extras${NC}"
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-fi
-
 echo -e "${COL}\nPreparing venv...\n${NC}"
 # Prepare venv for klipper
 python3 -m venv ~/klipper-venv
