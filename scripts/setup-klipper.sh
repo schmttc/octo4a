@@ -11,11 +11,7 @@ then
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
 fi
 
-echo -e "${COL}\nInstalling dependencies...\n${NC}"
-# install required dependencies
-#apk add py3-cffi py3-greenlet linux-headers can-utils
-#pip3 install python-can
-
+echo -e "${COL}\nPreparing venv...\n${NC}"
 # Prepare venv for klipper
 python3 -m venv ~/klipper-venv
 
@@ -34,7 +30,7 @@ mkdir -p /mnt/external/extensions/klipper
 cat << EOF > /mnt/external/extensions/klipper/manifest.json
 {
         "title": "Klipper plugin",
-        "description": "Requires OctoKlipper plugin"
+        "description": "(Requires OctoKlipper plugin)"
 }
 EOF
 
