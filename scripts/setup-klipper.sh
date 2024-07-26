@@ -28,7 +28,7 @@ rm -rf klipper.zip
 mv klipper-master /klipper
 echo "# replace with your config" >> /root/printer.cfg
 
-~/klipper-venv/bin/pip install -r ./klipper/scripts/klippy-requirements.txt
+~/klipper-venv/bin/pip install -r /klipper/scripts/klippy-requirements.txt
 
 mkdir -p /mnt/external/extensions/klipper
 cat << EOF > /mnt/external/extensions/klipper/manifest.json
