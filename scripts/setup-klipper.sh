@@ -38,7 +38,7 @@ cat << EOF > /mnt/external/extensions/klipper/kill.sh
 pkill -f 'klippy\.py'
 EOF
 
-cchmod +x /mnt/external/extensions/klipper/start.sh
+chmod +x /mnt/external/extensions/klipper/start.sh
 chmod +x /mnt/external/extensions/klipper/kill.sh
 chmod 777 /mnt/external/extensions/klipper/start.sh
 chmod 777 /mnt/external/extensions/klipper/kill.sh
