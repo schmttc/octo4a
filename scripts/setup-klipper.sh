@@ -13,8 +13,11 @@ fi
 
 echo -e "${COL}\nInstalling dependencies...\n${NC}"
 # install required dependencies
-apk add py3-cffi py3-greenlet linux-headers can-utils
-pip3 install python-can
+#apk add py3-cffi py3-greenlet linux-headers can-utils
+#pip3 install python-can
+
+# Prepare venv for klipper
+python3 -m venv ~/klipper-venv
 
 echo -e "${COL}Downloading klipper\n${NC}"
 curl -o klipper.zip -L https://github.com/Klipper3d/klipper/archive/refs/heads/master.zip
@@ -25,27 +28,31 @@ rm -rf klipper.zip
 mv klipper-master /klipper
 echo "# replace with your config" >> /root/printer.cfg
 
-mkdir -p /root/extensions/klipper
-cat << EOF > /root/extensions/klipper/manifest.json
+~/klipper-venv/bin/pip install -r ./klipper/scripts/klippy-requirements.txt
+
+mkdir -p /mnt/external/extensions/klipper
+cat << EOF > mkdir -p /mnt/external/extensions/klipper/manifest.json
 {
         "title": "Klipper plugin",
         "description": "Requires OctoKlipper plugin"
 }
 EOF
 
-cat << EOF > /root/extensions/klipper/start.sh
+cat << EOF > mkdir -p /mnt/external/extensions/klipper/start.sh
 #!/bin/sh
-python3 /klipper/klippy/klippy.py /root/printer.cfg -l /tmp/klippy.log -a /tmp/klippy_uds
+KLIPPER_ARGS="/klipper/klippy/klippy.py /root/printer.cfg -l /tmp/klippy.log -a /tmp/klippy_uds"
+/root/klipper-venv/bin/python \$KLIPPER_ARGS &
 EOF
 
-cat << EOF > /root/extensions/klipper/kill.sh
+cat << EOF > mkdir -p /mnt/external/extensions/klipper/kill.sh
 #!/bin/sh
 pkill -f 'klippy\.py'
 EOF
-chmod +x /root/extensions/klipper/start.sh
-chmod +x /root/extensions/klipper/kill.sh
-chmod 777 /root/extensions/klipper/start.sh
-chmod 777 /root/extensions/klipper/kill.sh
+
+cchmod +x /mnt/external/extensions/klipper/start.sh
+chmod +x /mnt/external/extensions/klipper/kill.sh
+chmod 777 /mnt/external/extensions/klipper/start.sh
+chmod 777 /mnt/external/extensions/klipper/kill.sh
 
 cat << EOF
 ${COL}
