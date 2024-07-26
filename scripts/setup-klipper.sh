@@ -31,20 +31,20 @@ echo "# replace with your config" >> /root/printer.cfg
 ~/klipper-venv/bin/pip install -r ./klipper/scripts/klippy-requirements.txt
 
 mkdir -p /mnt/external/extensions/klipper
-cat << EOF > mkdir -p /mnt/external/extensions/klipper/manifest.json
+cat << EOF > /mnt/external/extensions/klipper/manifest.json
 {
         "title": "Klipper plugin",
         "description": "Requires OctoKlipper plugin"
 }
 EOF
 
-cat << EOF > mkdir -p /mnt/external/extensions/klipper/start.sh
+cat << EOF > /mnt/external/extensions/klipper/start.sh
 #!/bin/sh
 KLIPPER_ARGS="/klipper/klippy/klippy.py /root/printer.cfg -l /tmp/klippy.log -a /tmp/klippy_uds"
 /root/klipper-venv/bin/python \$KLIPPER_ARGS &
 EOF
 
-cat << EOF > mkdir -p /mnt/external/extensions/klipper/kill.sh
+cat << EOF > /mnt/external/extensions/klipper/kill.sh
 #!/bin/sh
 pkill -f 'klippy\.py'
 EOF
