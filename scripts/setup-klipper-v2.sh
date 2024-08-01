@@ -51,4 +51,9 @@ cat << EOF
 ${COL}
 Klipper installed!
 Please kill the app and restart it again to see it in extension settings${NC}
+
+Set your OctoKlipper plugin settings:
+    Serial Port: /root/printer_data/comms/klippy.serial
+    Klipper Config Directory: /root/printer_data/config/
+    Klipper Log File: /root/printer_data/logs/klippy.log
 EOF
