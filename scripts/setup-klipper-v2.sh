@@ -13,13 +13,13 @@ git clone https://github.com/KevinOConnor/klipper
 ~/klipper-venv/bin/pip install -r ./klipper/scripts/klippy-requirements.txt
 
 # Prepare necessary directories
-#mkdir ~/printer_data/
-#mkdir ~/printer_data/config
-#mkdir ~/printer_data/logs
-#mkdir ~/printer_data/gcodes
-#mkdir ~/printer_data/systemd
-#mkdir ~/printer_data/comms
-#touch ~/printer_data/config/printer.cfg
+mkdir ~/printer_data/
+mkdir ~/printer_data/config
+mkdir ~/printer_data/logs
+mkdir ~/printer_data/gcodes
+mkdir ~/printer_data/systemd
+mkdir ~/printer_data/comms
+touch ~/printer_data/config/printer.cfg
 
 echo -e "${COL}\nInserting configurations...\n${NC}"
 
@@ -33,7 +33,7 @@ EOF
 
 cat << EOF > /mnt/external/extensions/klipper/start.sh
 #!/bin/sh
-KLIPPER_ARGS="/root/klipper/klippy/klippy.py /root/printer.cfg -l /tmp/klippy.log -I -a /tmp/klippy_uds"
+KLIPPER_ARGS="/root/klipper/klippy/klippy.py /root/printer_data/config/printer.cfg -l /root/printer_data/logs/klippy.log -I /root/printer_data/comms/klippy.serial -a /root/printer_data/comms/klippy.sock"
 /root/klipper-venv/bin/python \$KLIPPER_ARGS &
 EOF
 
